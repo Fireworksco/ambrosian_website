@@ -2,19 +2,27 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const scrolledRef = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      const y = window.scrollY
+      if (!scrolledRef.current && y > 150) {
+        scrolledRef.current = true
+        setIsScrolled(true)
+      } else if (scrolledRef.current && y < 30) {
+        scrolledRef.current = false
+        setIsScrolled(false)
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -28,18 +36,30 @@ const Header = () => {
   ]
 
   return (
-    <header className="bg-ambrosian-dark border-b border-ambrosian-gold/20 sticky top-0 z-50 transition-all duration-300">
-      <nav className="container mx-auto px-4 transition-all duration-300" style={{paddingTop: isScrolled ? '8px' : '16px', paddingBottom: isScrolled ? '8px' : '16px'}}>
+    <header className="bg-ambrosian-dark border-b border-ambrosian-gold/20 sticky top-0 z-50">
+      <nav className="container mx-auto px-4" style={{ paddingTop: isScrolled ? '4px' : '20px', paddingBottom: isScrolled ? '4px' : '20px' }}>
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <Image
-              src="/ambrosian-final-logo-stroke.png"
-              alt="Ambrosian Events & Management Logo"
-              width={isScrolled ? 180 : 300}
-              height={isScrolled ? 70 : 120}
-              className="h-auto hidden md:block transition-all duration-300"
-            />
+            <div
+              className="hidden md:block overflow-hidden"
+              style={{ height: isScrolled ? '52px' : '120px' }}
+            >
+              <Image
+                src="/ambrosian-final-logo-stroke.png"
+                alt="Ambrosian Events & Management Logo"
+                width={300}
+                height={120}
+                className="transition-transform duration-200"
+                style={{
+                  width: '300px',
+                  height: '120px',
+                  transform: isScrolled ? 'scale(0.43)' : 'scale(1)',
+                  transformOrigin: 'left top',
+                  willChange: 'transform',
+                }}
+              />
+            </div>
             <Image
               src="/ambrosian-final-logo-stroke.png"
               alt="Ambrosian Events & Management Logo"

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Gallery from '@/components/Gallery'
+import HeroSlider from '@/components/HeroSlider'
 
 export default function Home() {
   const services = [
@@ -45,46 +46,21 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-ambrosian-gold mb-6 leading-tight">
-            Ambrosian Events & Management
-          </h1>
-          <p className="text-xl md:text-2xl text-ambrosian-gold/80 mb-8">
-            Creating Unforgettable Moments with Professional Excellence
-          </p>
-          <p className="text-lg text-ambrosian-gold/70 mb-12 max-w-2xl mx-auto">
-            From exquisite catering to stunning decorations, professional staffing to cutting-edge photography - 
-            we bring your vision to life with unmatched expertise and attention to detail.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-ambrosian-gold text-ambrosian-dark px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-            >
-              Get in Touch
-            </Link>
-            <Link
-              href="#services"
-              className="border-2 border-ambrosian-gold text-ambrosian-gold px-8 py-4 rounded-lg font-semibold hover:bg-ambrosian-gold/10 transition-colors"
-            >
-              Explore Services
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
 
-      {/* Featured Recent Project */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
+      {/* Featured Projects */}
+      <section className="container mx-auto px-4 py-20 md:py-32 space-y-10">
+
+        {/* Card 1 — Banglafest & Award UK 2026 */}
         <div className="bg-gradient-to-r from-ambrosian-gold/10 via-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 sm:p-8 md:p-12">
             {/* Left: Image */}
-            <div className="relative h-[300px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-ambrosian-gold/20">
+            <div className="relative h-[300px] sm:h-[400px] md:h-[460px] rounded-lg overflow-hidden border border-ambrosian-gold/20 bg-white flex items-center justify-center">
               <Image
-                src="https://res.cloudinary.com/drgot7znf/image/upload/v1777142781/ade0d540-1103-4a43-96ac-dbe7ac2b126c_wkha9c.jpg"
-                alt="Ramadan & Eid Fair 2026"
+                src="/projects/banglafest-2026.png"
+                alt="Banglafest & Award UK 2026"
                 fill
-                className="object-cover"
+                className="object-contain p-4"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -93,17 +69,64 @@ export default function Home() {
             <div className="flex flex-col justify-center gap-6 sm:gap-8">
               <div>
                 <span className="inline-block bg-ambrosian-gold text-ambrosian-dark text-xs font-bold tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-6">
-                  RECENT PROJECT
+                  UPCOMING EVENT
                 </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ambrosian-gold mb-4 leading-tight">
-                  Ramadan & Eid Fair 2026
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ambrosian-gold mb-2 leading-tight">
+                  Banglafest & Award UK 2026
                 </h2>
-                <p className="text-ambrosian-gold/70 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-                  A grand celebration of community and culture. We are the official event management and sponsor of this immersive gathering featuring traditional arts, world-class exhibitions, shopping experiences, and authentic food stalls. Join us on Sunday, 8th March at Mayfair Venue.
+                <p className="text-ambrosian-gold/50 text-sm mb-4 font-medium">
+                  Sunday, 19 July 2026 · The Royal Regency, London
+                </p>
+                <p className="text-ambrosian-gold/70 text-sm sm:text-base leading-relaxed">
+                  A vibrant cultural and entertainment event celebrating community, talent, and achievement. Featuring an exciting evening of live performances, cultural showcases, and a prestigious awards ceremony in a lively and elegant atmosphere.
                 </p>
               </div>
 
-              {/* Features */}
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-ambrosian-gold mt-1">✓</span>
+                  <span className="text-ambrosian-gold/80 text-sm">Premium Ground Floor, VIP & General Seating</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-ambrosian-gold mt-1">✓</span>
+                  <span className="text-ambrosian-gold/80 text-sm">Live Performances & Cultural Entertainment</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-ambrosian-gold mt-1">✓</span>
+                  <span className="text-ambrosian-gold/80 text-sm">Prestigious Awards Ceremony</span>
+                </div>
+              </div>
+
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 bg-ambrosian-gold text-ambrosian-dark px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:opacity-90 transition-opacity w-fit"
+              >
+                View All Projects →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2 — Ramadan & Eid Fair 2026 */}
+        <div className="bg-gradient-to-l from-ambrosian-gold/10 via-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 sm:p-8 md:p-12">
+            {/* Left: Text Content (reversed on desktop) */}
+            <div className="flex flex-col justify-center gap-6 sm:gap-8 md:order-1">
+              <div>
+                <span className="inline-block bg-ambrosian-gold/20 text-ambrosian-gold border border-ambrosian-gold/40 text-xs font-bold tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-6">
+                  RECENT PROJECT
+                </span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ambrosian-gold mb-2 leading-tight">
+                  Ramadan & Eid Fair 2026
+                </h2>
+                <p className="text-ambrosian-gold/50 text-sm mb-4 font-medium">
+                  Sunday, 8 March 2026 · Mayfair Venue, London
+                </p>
+                <p className="text-ambrosian-gold/70 text-sm sm:text-base leading-relaxed">
+                  A grand celebration of community and culture. We were the official event management and sponsor of this immersive gathering featuring traditional arts, world-class exhibitions, shopping experiences, and authentic food stalls.
+                </p>
+              </div>
+
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <span className="text-ambrosian-gold mt-1">✓</span>
@@ -119,16 +142,27 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* CTA */}
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 bg-ambrosian-gold text-ambrosian-dark px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:opacity-90 transition-opacity w-fit"
+                className="inline-flex items-center gap-2 border border-ambrosian-gold/50 text-ambrosian-gold px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:bg-ambrosian-gold/10 transition-colors w-fit"
               >
                 View All Projects →
               </Link>
             </div>
+
+            {/* Right: Image */}
+            <div className="relative h-[300px] sm:h-[400px] md:h-[460px] rounded-lg overflow-hidden border border-ambrosian-gold/20 md:order-2">
+              <Image
+                src="https://res.cloudinary.com/drgot7znf/image/upload/v1777142781/ade0d540-1103-4a43-96ac-dbe7ac2b126c_wkha9c.jpg"
+                alt="Ramadan & Eid Fair 2026"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
+
       </section>
 
       {/* Services Section */}

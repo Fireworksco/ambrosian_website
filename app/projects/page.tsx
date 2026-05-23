@@ -45,6 +45,133 @@ export default function ProjectsPage() {
         <div className="mt-8 h-px w-full bg-ambrosian-gold/20" />
       </section>
 
+      {/* Featured Event: Banglafest & Award UK 2026 */}
+      <section className="container mx-auto px-6 pb-16">
+        <div className="bg-gradient-to-b from-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">
+          {/* Badge */}
+          <div className="flex justify-center pt-8">
+            <span className="inline-block bg-ambrosian-gold text-ambrosian-dark text-xs font-bold tracking-widest px-4 py-2 rounded-full">
+              UPCOMING EVENT
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-6 sm:p-8 md:p-12">
+            {/* Left: Portrait Video + Poster */}
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-6 items-start">
+              {/* Promo Reel Video — portrait 9:16 */}
+              <div className="w-full sm:w-1/2 lg:w-full max-w-xs mx-auto sm:mx-0 lg:mx-auto">
+                <div className="relative w-full aspect-[9/16] rounded-xl overflow-hidden border border-ambrosian-gold/20 bg-black">
+                  <video
+                    controls
+                    playsInline
+                    className="w-full h-full object-contain"
+                  >
+                    <source
+                      src="https://res.cloudinary.com/di97ipri0/video/upload/v1779516652/WhatsApp_Video_2026-05-22_at_11.16.09_AM_agkllw.mp4"
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+
+              {/* Poster / Logo */}
+              <div className="w-full sm:w-1/2 lg:w-full">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-ambrosian-gold/20 bg-white">
+                  <Image
+                    src="/projects/banglafest-2026.png"
+                    alt="Banglafest & Award UK 2026 Poster"
+                    fill
+                    className="object-contain p-6"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Event Details */}
+            <div className="flex flex-col justify-start gap-6 sm:gap-8">
+              <div>
+                <span className="inline-block border border-ambrosian-gold/50 text-ambrosian-gold/70 text-xs tracking-widest px-3 py-1 rounded mb-4 sm:mb-6 w-fit">
+                  CULTURAL FESTIVAL & AWARDS
+                </span>
+                <h2 className="text-4xl sm:text-5xl font-bold text-ambrosian-gold mb-2 leading-tight">
+                  Banglafest & Award UK 2026
+                </h2>
+                <p className="text-ambrosian-gold/50 text-sm font-medium mb-4">
+                  Sunday, 19 July 2026 · The Royal Regency, London
+                </p>
+                <p className="text-ambrosian-gold/60 text-sm sm:text-base leading-relaxed">
+                  A vibrant cultural and entertainment event celebrating community, talent, and achievement. An exciting evening of live performances, cultural showcases, and a prestigious awards ceremony in a lively and elegant atmosphere.
+                </p>
+              </div>
+
+              <div className="space-y-4 sm:space-y-5">
+                <div className="border-l-2 border-ambrosian-gold/40 pl-4 sm:pl-6">
+                  <h3 className="text-ambrosian-gold/70 text-xs tracking-widest uppercase mb-1">Date & Time</h3>
+                  <p className="text-ambrosian-gold font-semibold text-sm sm:text-base">
+                    Sunday, 19th July, 2026
+                  </p>
+                </div>
+
+                <div className="border-l-2 border-ambrosian-gold/40 pl-4 sm:pl-6">
+                  <h3 className="text-ambrosian-gold/70 text-xs tracking-widest uppercase mb-1">Venue</h3>
+                  <p className="text-ambrosian-gold font-semibold text-sm sm:text-base">The Royal Regency</p>
+                  <p className="text-ambrosian-gold/60 text-xs sm:text-sm mt-1">London, United Kingdom</p>
+                </div>
+
+                <div className="border-l-2 border-ambrosian-gold/40 pl-4 sm:pl-6">
+                  <h3 className="text-ambrosian-gold/70 text-xs tracking-widest uppercase mb-2">Seating Categories</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2 text-ambrosian-gold/80">
+                      <span className="text-ambrosian-gold mt-1">✓</span>
+                      <span>Premium Ground Floor</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-ambrosian-gold/80">
+                      <span className="text-ambrosian-gold mt-1">✓</span>
+                      <span>VIP Seating</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-ambrosian-gold/80">
+                      <span className="text-ambrosian-gold mt-1">✓</span>
+                      <span>General First Floor</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="border-l-2 border-ambrosian-gold/40 pl-4 sm:pl-6">
+                  <h3 className="text-ambrosian-gold/70 text-xs tracking-widest uppercase mb-2">Event Highlights</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2 text-ambrosian-gold/80">
+                      <span className="text-ambrosian-gold mt-1">✓</span>
+                      <span>Live Performances & Cultural Entertainment</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-ambrosian-gold/80">
+                      <span className="text-ambrosian-gold mt-1">✓</span>
+                      <span>Prestigious Awards Ceremony</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                <Link
+                  href="/contact"
+                  className="flex-1 bg-ambrosian-gold text-ambrosian-dark px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:opacity-90 transition-opacity text-center"
+                >
+                  Reserve Your Spot
+                </Link>
+                <Link
+                  href="/contact"
+                  className="flex-1 border border-ambrosian-gold text-ambrosian-gold px-6 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-ambrosian-gold/10 transition-colors text-center"
+                >
+                  Get in Touch
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Event: Ramadan & Eid Fair 2026 */}
       <section className="container mx-auto px-6 pb-24">
         <div className="bg-gradient-to-b from-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">

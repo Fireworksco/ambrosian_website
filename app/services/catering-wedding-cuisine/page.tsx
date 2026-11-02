@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Catering & Wedding Cuisine - Ambrosian Events & Management',
@@ -26,42 +29,35 @@ export default function CateringWeddingCuisine() {
   ]
 
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* Breadcrumb */}
-          <div className="mb-8 text-ambrosian-gold/60">
-            <Link href="/" className="hover:text-ambrosian-gold transition-colors">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/#services" className="hover:text-ambrosian-gold transition-colors">Services</Link>
-            <span className="mx-2">/</span>
-            <span className="text-ambrosian-gold">Catering & Wedding Cuisine</span>
-          </div>
-
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🍽️</div>
-            <h1 className="text-4xl md:text-5xl font-bold text-ambrosian-gold mb-6">
+    <>
+      <PageHero image="/project-gallery/7.jpeg">
+        <Breadcrumb current="Catering & Wedding Cuisine" />
+        <Image src="/services_icons/icons-01.png" alt="" width={104} height={104} className="page-icon in-1" style={{ marginTop: 36 }} />
+        <h1 className="h-xl page-title in-2">
               Catering & Wedding Cuisine
             </h1>
-            <p className="text-xl text-ambrosian-gold/80 max-w-3xl mx-auto">
+        <p className="page-intro in-3">
               Elevate your event with our exceptional catering services featuring professionally trained chefs 
               and a wide variety of delicious cuisine options
             </p>
-          </div>
+      </PageHero>
+
+      <div className="page-body">
+      <div className="wrap">
+        <div className="max-w-5xl mx-auto">
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 blk">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-6 hover:border-ambrosian-gold transition-all"
+                className="card rv"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-ambrosian-gold mb-3">
+                <div className="card-emoji">{feature.icon}</div>
+                <h3 className="card-t">
                   {feature.title}
                 </h3>
-                <p className="text-ambrosian-gold/70">
+                <p className="card-d">
                   {feature.description}
                 </p>
               </div>
@@ -69,11 +65,11 @@ export default function CateringWeddingCuisine() {
           </div>
 
           {/* Detailed Description */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 md:p-12 mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Why Choose Our Catering Services?
             </h2>
-            <div className="space-y-4 text-ambrosian-gold/80 leading-relaxed">
+            <div className="panel-copy">
               <p>
                 At Ambrosian Events & Management, we understand that exceptional food is at the heart of every memorable event. 
                 Our catering services combine culinary artistry with professional excellence to deliver an unforgettable dining experience.
@@ -92,8 +88,8 @@ export default function CateringWeddingCuisine() {
           </div>
 
           {/* Menu Categories */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-8 text-center">
+          <div className="blk">
+            <h2 className="sec-title center rv">
               Our Menu Options
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -107,12 +103,12 @@ export default function CateringWeddingCuisine() {
               ].map((category, index) => (
                 <div
                   key={index}
-                  className="border border-ambrosian-gold/30 rounded-lg p-6 hover:bg-ambrosian-gold/5 transition-colors"
+                  className="line-card rv"
                 >
-                  <h3 className="text-lg font-semibold text-ambrosian-gold mb-2">
+                  <h3 className="line-card-t">
                     {category.name}
                   </h3>
-                  <p className="text-ambrosian-gold/70">
+                  <p className="card-d">
                     {category.desc}
                   </p>
                 </div>
@@ -121,23 +117,24 @@ export default function CateringWeddingCuisine() {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-8 md:p-12">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-4">
+          <div className="cta-box rv">
+            <h2 className="cta-box-t">
               Ready to Create a Culinary Experience?
             </h2>
-            <p className="text-ambrosian-gold/70 mb-8 max-w-2xl mx-auto">
+            <p className="cta-box-d">
               Contact us today to discuss your catering requirements and let our expert chefs create 
               a memorable dining experience for your guests
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-ambrosian-gold text-ambrosian-dark px-10 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
+              className="btn btn-gold"
             >
               Get a Quote
             </Link>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

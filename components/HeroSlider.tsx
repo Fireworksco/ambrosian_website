@@ -1,9 +1,5 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect, useCallback } from 'react'
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
+import Arrow from '@/components/Arrow'
 
 const slides = [
   {
@@ -20,122 +16,47 @@ const slides = [
   },
 ]
 
+// The photo strip pans continuously (CSS). It is repeated so the loop is seamless
+// on wide screens: the animation moves it by exactly half its width.
+const strip = [...slides, ...slides, ...slides, ...slides]
+
 export default function HeroSlider() {
-  const [current, setCurrent] = useState(0)
-
-  const next = useCallback(() => setCurrent(c => (c + 1) % slides.length), [])
-  const prev = () => setCurrent(c => (c - 1 + slides.length) % slides.length)
-  const goTo = (i: number) => setCurrent(i)
-
-  useEffect(() => {
-    const id = setInterval(next, 5000)
-    return () => clearInterval(id)
-  }, [next])
-
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ height: '100svh', minHeight: '600px', maxHeight: '900px' }}
-    >
-      {/* Slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={slide.src}
-          aria-hidden={i !== current}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-          style={{ opacity: i === current ? 1 : 0 }}
-        >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            priority={i === 0}
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+    <section className="hero" id="top">
+      <div className="hero-bg">
+        <div className="strip">
+          {strip.map((slide, i) => (
+            <div
+              key={i}
+              className="bgc"
+              role={i < slides.length ? 'img' : undefined}
+              aria-label={i < slides.length ? slide.alt : undefined}
+              aria-hidden={i < slides.length ? undefined : true}
+              style={{ backgroundImage: `url(${slide.src})` }}
+            />
+          ))}
         </div>
-      ))}
-
-      {/* Layered overlay — keeps text readable across all images */}
-      <div className="absolute inset-0 bg-ambrosian-dark/50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-ambrosian-dark/40 via-transparent to-ambrosian-dark/70" />
-
-      {/* Bottom fade — blends seamlessly into the next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-ambrosian-dark to-transparent" />
-
-      {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center justify-start h-full px-4 text-center pt-[clamp(2.5rem,10vh,5rem)]">
-        <div className="max-w-4xl mx-auto">
-          {/* <p className="text-ambrosian-gold/70 text-xs md:text-sm font-semibold tracking-[0.35em] uppercase mb-4">
-            Welcome to
-          </p> */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ambrosian-gold mb-5 leading-tight drop-shadow-lg">
-            Ambrosian Events & Management
-          </h1>
-          <div className="w-20 h-[2px] bg-ambrosian-gold mx-auto mb-6 opacity-60" />
-          <p className="text-lg sm:text-xl md:text-2xl text-ambrosian-gold/80 mb-5">
-            Creating Unforgettable Moments with Professional Excellence
-          </p>
-          <p className="text-sm sm:text-base md:text-lg text-ambrosian-gold/65 mb-10 max-w-2xl mx-auto leading-relaxed">
-            From exquisite catering to stunning decorations, professional staffing to cutting-edge photography —
-            we bring your vision to life with unmatched expertise and attention to detail.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="bg-ambrosian-gold text-ambrosian-dark px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity text-sm sm:text-base"
-            >
-              Get in Touch
-            </Link>
-            <Link
-              href="#services"
-              className="border-2 border-ambrosian-gold text-ambrosian-gold px-8 py-4 rounded-lg font-semibold hover:bg-ambrosian-gold/10 transition-colors text-sm sm:text-base"
-            >
-              Explore Services
-            </Link>
-          </div>
-        </div>
+        <div className="shade" style={{ background: 'rgba(13,24,40,.52)' }} />
       </div>
 
-      {/* Prev arrow */}
-      <button
-        onClick={prev}
-        aria-label="Previous slide"
-        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-ambrosian-gold/40 bg-ambrosian-dark/40 text-ambrosian-gold hover:border-ambrosian-gold hover:bg-ambrosian-gold/15 transition-all duration-200"
-      >
-        <HiChevronLeft size={22} />
-      </button>
-
-      {/* Next arrow */}
-      <button
-        onClick={next}
-        aria-label="Next slide"
-        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-ambrosian-gold/40 bg-ambrosian-dark/40 text-ambrosian-gold hover:border-ambrosian-gold hover:bg-ambrosian-gold/15 transition-all duration-200"
-      >
-        <HiChevronRight size={22} />
-      </button>
-
-      {/* Dot navigation */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className="rounded-full transition-all duration-300"
-            style={{
-              width: i === current ? '28px' : '8px',
-              height: '8px',
-              background: i === current ? '#fbcc7b' : 'rgba(251,204,123,0.35)',
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Scroll hint */}
-      <div className="absolute bottom-10 right-5 md:right-8 z-20 hidden sm:flex flex-col items-center gap-1 text-ambrosian-gold/40">
-        <span className="text-[10px] tracking-widest uppercase rotate-90 origin-center translate-y-3">Scroll</span>
-        <div className="w-[1px] h-8 bg-ambrosian-gold/30 mt-4" />
+      <div className="wrap hero-out" style={{ position: 'relative' }}>
+        <p className="kicker in-1">Full-service event management · London</p>
+        <h1 className="h-xl" style={{ marginTop: 26, fontSize: 'clamp(40px, 6vw, 88px)', color: '#FBF7F0' }}>
+          <span className="ln in-ln"><span>Modern elegance,</span></span>
+          <span className="ln in-ln"><span><em className="serif-i" style={{ fontSize: '1.14em' }}>memorable</em> experiences</span></span>
+        </h1>
+        <p className="in-2" style={{ maxWidth: '40em', margin: '28px auto 0', fontSize: 19, lineHeight: 1.65, fontWeight: 300, color: '#FBF7F0' }}>
+          Weddings, cultural festivals, concerts and corporate events — with catering, styling, staffing, security and film from one dedicated team.{' '}
+          <a href="#services" style={{ color: '#F9C879', textUnderlineOffset: 4 }}>Explore our services</a>.
+        </p>
+        <div className="in-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16, marginTop: 42 }}>
+          <Link className="btn btn-gold" href="/contact">
+            Plan your event <Arrow />
+          </Link>
+          <Link className="btn btn-line" href="/projects">
+            View our work
+          </Link>
+        </div>
       </div>
     </section>
   )

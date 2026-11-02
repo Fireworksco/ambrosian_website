@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Decoration & Event Styling - Ambrosian Events & Management',
@@ -26,42 +29,35 @@ export default function DecorationStyling() {
   ]
 
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* Breadcrumb */}
-          <div className="mb-8 text-ambrosian-gold/60">
-            <Link href="/" className="hover:text-ambrosian-gold transition-colors">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/#services" className="hover:text-ambrosian-gold transition-colors">Services</Link>
-            <span className="mx-2">/</span>
-            <span className="text-ambrosian-gold">Decoration & Event Styling</span>
-          </div>
-
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🎨</div>
-            <h1 className="text-4xl md:text-5xl font-bold text-ambrosian-gold mb-6">
+    <>
+      <PageHero image="/project-gallery/3.jpeg">
+        <Breadcrumb current="Decoration & Event Styling" />
+        <Image src="/services_icons/icons-03.png" alt="" width={104} height={104} className="page-icon in-1" style={{ marginTop: 36 }} />
+        <h1 className="h-xl page-title in-2">
               Decoration & Event Styling
             </h1>
-            <p className="text-xl text-ambrosian-gold/80 max-w-3xl mx-auto">
+        <p className="page-intro in-3">
               Transform your venue with our specialized decoration and creative styling expertise, 
               from stage décor to lighting design
             </p>
-          </div>
+      </PageHero>
+
+      <div className="page-body">
+      <div className="wrap">
+        <div className="max-w-5xl mx-auto">
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 blk">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-6 hover:border-ambrosian-gold transition-all"
+                className="card rv"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-ambrosian-gold mb-3">
+                <div className="card-emoji">{feature.icon}</div>
+                <h3 className="card-t">
                   {feature.title}
                 </h3>
-                <p className="text-ambrosian-gold/70">
+                <p className="card-d">
                   {feature.description}
                 </p>
               </div>
@@ -69,11 +65,11 @@ export default function DecorationStyling() {
           </div>
 
           {/* Detailed Description */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 md:p-12 mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Creating Stunning Visual Experiences
             </h2>
-            <div className="space-y-4 text-ambrosian-gold/80 leading-relaxed">
+            <div className="panel-copy">
               <p>
                 At Ambrosian Events & Management, we believe that exceptional decoration transforms ordinary spaces 
                 into extraordinary experiences. Our specialized decoration and creative styling team brings artistic 
@@ -92,8 +88,8 @@ export default function DecorationStyling() {
           </div>
 
           {/* Services */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-8 text-center">
+          <div className="blk">
+            <h2 className="sec-title center rv">
               Our Decoration Services
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -107,12 +103,12 @@ export default function DecorationStyling() {
               ].map((service, index) => (
                 <div
                   key={index}
-                  className="border border-ambrosian-gold/30 rounded-lg p-6 hover:bg-ambrosian-gold/5 transition-colors"
+                  className="line-card rv"
                 >
-                  <h3 className="text-lg font-semibold text-ambrosian-gold mb-2">
+                  <h3 className="line-card-t">
                     {service.name}
                   </h3>
-                  <p className="text-ambrosian-gold/70">
+                  <p className="card-d">
                     {service.desc}
                   </p>
                 </div>
@@ -121,11 +117,11 @@ export default function DecorationStyling() {
           </div>
 
           {/* Style Options */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 mb-16">
-            <h2 className="text-2xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Popular Styling Themes
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {[
                 'Classic Elegance',
                 'Modern Contemporary',
@@ -138,68 +134,69 @@ export default function DecorationStyling() {
               ].map((theme, index) => (
                 <div
                   key={index}
-                  className="border border-ambrosian-gold/30 rounded-lg p-4 text-center hover:bg-ambrosian-gold/10 transition-colors"
+                  className="chip"
                 >
-                  <p className="text-ambrosian-gold font-medium">{theme}</p>
+                  <p className="chip-t">{theme}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Why Choose Us */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 mb-16">
-            <h2 className="text-2xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Why Choose Our Decoration Services?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Expert Design Team</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Experienced professionals with creative vision</p>
+                  <h3 className="item-t">Expert Design Team</h3>
+                  <p className="item-d">Experienced professionals with creative vision</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Custom Designs</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Tailored concepts that reflect your unique style</p>
+                  <h3 className="item-t">Custom Designs</h3>
+                  <p className="item-d">Tailored concepts that reflect your unique style</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Quality Materials</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Premium décor items and professional installations</p>
+                  <h3 className="item-t">Quality Materials</h3>
+                  <p className="item-d">Premium décor items and professional installations</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Complete Service</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">From concept to installation and removal</p>
+                  <h3 className="item-t">Complete Service</h3>
+                  <p className="item-d">From concept to installation and removal</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-8 md:p-12">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-4">
+          <div className="cta-box rv">
+            <h2 className="cta-box-t">
               Ready to Transform Your Venue?
             </h2>
-            <p className="text-ambrosian-gold/70 mb-8 max-w-2xl mx-auto">
+            <p className="cta-box-d">
               Let our creative styling team design a stunning visual experience that exceeds your expectations
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-ambrosian-gold text-ambrosian-dark px-10 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
+              className="btn btn-gold"
             >
               Get a Quote
             </Link>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

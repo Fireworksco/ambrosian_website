@@ -1,5 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
+import PageHero from '@/components/PageHero'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'SIA Security Services - Ambrosian Events & Management',
@@ -26,42 +29,35 @@ export default function SecurityServices() {
   ]
 
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* Breadcrumb */}
-          <div className="mb-8 text-ambrosian-gold/60">
-            <Link href="/" className="hover:text-ambrosian-gold transition-colors">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/#services" className="hover:text-ambrosian-gold transition-colors">Services</Link>
-            <span className="mx-2">/</span>
-            <span className="text-ambrosian-gold">SIA Security Services</span>
-          </div>
-
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="text-6xl mb-6">🛡️</div>
-            <h1 className="text-4xl md:text-5xl font-bold text-ambrosian-gold mb-6">
+    <>
+      <PageHero image="/project-gallery/8.jpeg">
+        <Breadcrumb current="SIA Security Services" />
+        <Image src="/services_icons/icons-04.png" alt="" width={104} height={104} className="page-icon in-1" style={{ marginTop: 36 }} />
+        <h1 className="h-xl page-title in-2">
               SIA Security Services
             </h1>
-            <p className="text-xl text-ambrosian-gold/80 max-w-3xl mx-auto">
+        <p className="page-intro in-3">
               Professional licensed security services providing door supervision, crowd control, 
               and VIP protection for your events
             </p>
-          </div>
+      </PageHero>
+
+      <div className="page-body">
+      <div className="wrap">
+        <div className="max-w-5xl mx-auto">
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 blk">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-6 hover:border-ambrosian-gold transition-all"
+                className="card rv"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-ambrosian-gold mb-3">
+                <div className="card-emoji">{feature.icon}</div>
+                <h3 className="card-t">
                   {feature.title}
                 </h3>
-                <p className="text-ambrosian-gold/70">
+                <p className="card-d">
                   {feature.description}
                 </p>
               </div>
@@ -69,11 +65,11 @@ export default function SecurityServices() {
           </div>
 
           {/* Detailed Description */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 md:p-12 mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Professional Security You Can Trust
             </h2>
-            <div className="space-y-4 text-ambrosian-gold/80 leading-relaxed">
+            <div className="panel-copy">
               <p>
                 At Ambrosian Events & Management, we understand that safety and security are paramount to the success 
                 of any event. Our SIA-licensed security personnel provide professional, discrete, and effective 
@@ -93,8 +89,8 @@ export default function SecurityServices() {
           </div>
 
           {/* Security Services */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-8 text-center">
+          <div className="blk">
+            <h2 className="sec-title center rv">
               Our Security Services
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,12 +104,12 @@ export default function SecurityServices() {
               ].map((service, index) => (
                 <div
                   key={index}
-                  className="border border-ambrosian-gold/30 rounded-lg p-6 hover:bg-ambrosian-gold/5 transition-colors"
+                  className="line-card rv"
                 >
-                  <h3 className="text-lg font-semibold text-ambrosian-gold mb-2">
+                  <h3 className="line-card-t">
                     {service.name}
                   </h3>
-                  <p className="text-ambrosian-gold/70">
+                  <p className="card-d">
                     {service.desc}
                   </p>
                 </div>
@@ -122,48 +118,48 @@ export default function SecurityServices() {
           </div>
 
           {/* Certifications */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 mb-16">
-            <h2 className="text-2xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Professional Certifications & Training
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">SIA Licensed</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">All security staff hold valid SIA licenses</p>
+                  <h3 className="item-t">SIA Licensed</h3>
+                  <p className="item-d">All security staff hold valid SIA licenses</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Conflict Management</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Trained in de-escalation and conflict resolution</p>
+                  <h3 className="item-t">Conflict Management</h3>
+                  <p className="item-d">Trained in de-escalation and conflict resolution</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">First Aid Certified</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Emergency first aid and medical response training</p>
+                  <h3 className="item-t">First Aid Certified</h3>
+                  <p className="item-d">Emergency first aid and medical response training</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">✓</span>
+              <div className="item">
+                <span className="item-emoji">✓</span>
                 <div>
-                  <h3 className="font-semibold text-ambrosian-gold mb-1">Customer Service</h3>
-                  <p className="text-ambrosian-gold/70 text-sm">Professional and courteous guest interaction</p>
+                  <h3 className="item-t">Customer Service</h3>
+                  <p className="item-d">Professional and courteous guest interaction</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Event Types */}
-          <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 mb-16">
-            <h2 className="text-2xl font-bold text-ambrosian-gold mb-6">
+          <div className="panel rv">
+            <h2 className="panel-title">
               Events We Secure
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {[
                 'Weddings',
                 'Corporate Events',
@@ -177,31 +173,32 @@ export default function SecurityServices() {
               ].map((eventType, index) => (
                 <div
                   key={index}
-                  className="border border-ambrosian-gold/30 rounded-lg p-4 text-center hover:bg-ambrosian-gold/10 transition-colors"
+                  className="chip"
                 >
-                  <p className="text-ambrosian-gold font-medium">{eventType}</p>
+                  <p className="chip-t">{eventType}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-ambrosian-gold/5 border border-ambrosian-gold/30 rounded-lg p-8 md:p-12">
-            <h2 className="text-3xl font-bold text-ambrosian-gold mb-4">
+          <div className="cta-box rv">
+            <h2 className="cta-box-t">
               Need Professional Event Security?
             </h2>
-            <p className="text-ambrosian-gold/70 mb-8 max-w-2xl mx-auto">
+            <p className="cta-box-d">
               Contact us to discuss your security requirements and ensure your event runs safely and smoothly
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-ambrosian-gold text-ambrosian-dark px-10 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
+              className="btn btn-gold"
             >
               Get a Quote
             </Link>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

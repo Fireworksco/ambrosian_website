@@ -18,7 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-ambrosian-dark text-ambrosian-gold">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Jost:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="motion">
         <Header />
         <main className="min-h-screen">
           {children}

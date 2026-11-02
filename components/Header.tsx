@@ -1,167 +1,140 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import { HiMenu, HiX } from 'react-icons/hi'
+
+const services = [
+  { name: 'Catering & Wedding Cuisine', slug: 'catering-wedding-cuisine' },
+  { name: 'Professional Event Staffing', slug: 'event-staffing' },
+  { name: 'Decoration & Event Styling', slug: 'decoration-styling' },
+  { name: 'SIA Security Services', slug: 'security-services' },
+  { name: 'Marketing & Event Management', slug: 'marketing-management' },
+  { name: 'Photography & Videography', slug: 'photography-videography' },
+]
+
+const Caret = () => (
+  <svg className="caret" width="9" height="6" viewBox="0 0 9 6" fill="currentColor" aria-hidden="true">
+    <path d="M0 0h9L4.5 6z" />
+  </svg>
+)
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const scrolledRef = useRef(false)
+  const openBtn = useRef<HTMLButtonElement>(null)
+  const pathname = usePathname() || '/'
 
+  const close = () => setIsMenuOpen(false)
+
+  // Lock page scroll while the full-screen menu is open; close on Escape
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY
-      if (!scrolledRef.current && y > 150) {
-        scrolledRef.current = true
-        setIsScrolled(true)
-      } else if (scrolledRef.current && y < 30) {
-        scrolledRef.current = false
-        setIsScrolled(false)
+    if (!isMenuOpen) return
+    document.documentElement.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false)
+        openBtn.current?.focus()
       }
     }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.documentElement.style.overflow = ''
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [isMenuOpen])
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const services = [
-    { name: 'Catering & Wedding Cuisine', slug: 'catering-wedding-cuisine' },
-    { name: 'Professional Event Staffing', slug: 'event-staffing' },
-    { name: 'Decoration & Event Styling', slug: 'decoration-styling' },
-    { name: 'SIA Security Services', slug: 'security-services' },
-    { name: 'Marketing & Event Management', slug: 'marketing-management' },
-    { name: 'Photography & Videography', slug: 'photography-videography' },
-  ]
+  const active = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <header className="bg-ambrosian-dark border-b border-ambrosian-gold/20 sticky top-0 z-50">
-      <nav className="container mx-auto px-4" style={{ paddingTop: isScrolled ? '4px' : '20px', paddingBottom: isScrolled ? '4px' : '20px' }}>
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <div
-              className="hidden md:block overflow-hidden"
-              style={{ height: isScrolled ? '52px' : '120px' }}
-            >
-              <Image
-                src="/ambrosian-final-logo-stroke.png"
-                alt="Ambrosian Events & Management Logo"
-                width={300}
-                height={120}
-                className="transition-transform duration-200"
-                style={{
-                  width: '300px',
-                  height: '120px',
-                  transform: isScrolled ? 'scale(0.43)' : 'scale(1)',
-                  transformOrigin: 'left top',
-                  willChange: 'transform',
-                }}
-              />
-            </div>
-            <Image
-              src="/ambrosian-final-logo-stroke.png"
-              alt="Ambrosian Events & Management Logo"
-              width={120}
-              height={50}
-              className="h-auto md:hidden transition-all duration-300"
-            />
+    <>
+      <header className="nav">
+        <div className="wrap nav-row">
+          <Link href="/" className="brand" aria-label="Ambrosian Events & Management Logo">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="brand-mark" src="/brand/mark-gold.png" alt="" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="brand-word" src="/brand/wordmark-gold.png" alt="Ambrosian Events & Management Logo" />
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <HiX size={24} color="#fbcc7b" />
-            ) : (
-              <HiMenu size={24} color="#fbcc7b" />
-            )}
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-ambrosian-gold hover:opacity-80 transition-opacity">
+          <nav className="nav-links" aria-label="Main">
+            <Link href="/" className={`nl${active('/') ? ' is-active' : ''}`}>
               Home
             </Link>
-            
-            {/* Services Dropdown */}
-            <div className="relative group">
-              <button className="text-ambrosian-gold hover:opacity-80 transition-opacity">
-                Services
-              </button>
-              <div className="absolute left-0 mt-2 w-64 bg-ambrosian-dark border border-ambrosian-gold/30 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div className="dd">
+              <Link href="/#services" className={`nl${active('/services') ? ' is-active' : ''}`} aria-haspopup="true">
+                Services <Caret />
+              </Link>
+              <ul className="dd-menu">
                 {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="block px-4 py-3 text-ambrosian-gold hover:bg-ambrosian-gold/10 transition-colors first:rounded-t-lg last:rounded-b-lg"
-                  >
-                    {service.name}
-                  </Link>
+                  <li key={service.slug}>
+                    <Link href={`/services/${service.slug}`}>{service.name}</Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-
-            <Link href="/projects" className="text-ambrosian-gold hover:opacity-80 transition-opacity">
+            <Link href="/projects" className={`nl${active('/projects') ? ' is-active' : ''}`}>
               Projects
             </Link>
-
-            <Link href="/contact" className="text-ambrosian-gold hover:opacity-80 transition-opacity">
+            <Link href="/contact" className={`nl${active('/contact') ? ' is-active' : ''}`}>
               Contact
             </Link>
+          </nav>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Link className="btn btn-gold nav-cta" href="/contact" style={{ minHeight: 50, padding: '0 24px', fontSize: 14 }}>
+              Get in Touch
+            </Link>
+            <button
+              ref={openBtn}
+              className="burger"
+              type="button"
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M0 1h20M0 7h20M0 13h20" />
+              </svg>
+            </button>
           </div>
         </div>
+        <div className="progress" aria-hidden="true" />
+      </header>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-2">
-            <Link
-              href="/"
-              className="block py-2 text-ambrosian-gold hover:opacity-80 transition-opacity"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            
-            <div className="py-2">
-              <p className="font-semibold text-ambrosian-gold mb-2">Services</p>
-              <div className="pl-4 space-y-2">
-                {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="block py-1 text-ambrosian-gold/90 hover:opacity-80 transition-opacity text-sm"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {service.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              href="/projects"
-              className="block py-2 text-ambrosian-gold hover:opacity-80 transition-opacity"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/contact"
-              className="block py-2 text-ambrosian-gold hover:opacity-80 transition-opacity"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
+      {isMenuOpen && (
+        <div className="menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 48 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/wordmark-gold.png" alt="Ambrosian Events & Management Logo" style={{ height: 22, width: 'auto' }} />
+            <button className="burger" type="button" aria-label="Toggle menu" onClick={close} style={{ display: 'inline-flex' }} autoFocus>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M2 2l12 12M14 2L2 14" />
+              </svg>
+            </button>
           </div>
-        )}
-      </nav>
-    </header>
+          <nav aria-label="Mobile" style={{ display: 'flex', flexDirection: 'column', marginTop: 48 }}>
+            <Link className="menu-link" href="/" onClick={close}><small>01</small>Home</Link>
+            <p className="menu-link"><small>02</small>Services</p>
+            <div className="menu-sub">
+              {services.map((service) => (
+                <Link key={service.slug} href={`/services/${service.slug}`} onClick={close}>
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+            <Link className="menu-link" href="/projects" onClick={close}><small>03</small>Projects</Link>
+            <Link className="menu-link" href="/contact" onClick={close}><small>04</small>Contact</Link>
+          </nav>
+          <div style={{ marginTop: 'auto', paddingTop: 40, display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <Link className="btn btn-gold" href="/contact" onClick={close}>Get in Touch</Link>
+            <a href="mailto:connect@ambrosianuk.com" style={{ fontSize: 16, color: '#F9C879', textDecoration: 'none' }}>connect@ambrosianuk.com</a>
+            <a href="tel:+447424407743" style={{ fontSize: 16, color: '#F9C879', textDecoration: 'none' }}>+44 7424 407743</a>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

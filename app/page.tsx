@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Gallery from '@/components/Gallery'
 import HeroSlider from '@/components/HeroSlider'
+import Arrow from '@/components/Arrow'
 
 export default function Home() {
   const services = [
@@ -43,225 +44,194 @@ export default function Home() {
     },
   ]
 
+  const Ring = () => (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+      <circle cx="9" cy="9" r="6.4" fill="none" stroke="#D42938" strokeWidth="2.6" />
+    </svg>
+  )
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <HeroSlider />
 
-      {/* Featured Projects */}
-      <section className="container mx-auto px-4 py-20 md:py-32 space-y-10">
+      {/* About Ambrosian */}
+      <section id="about" style={{ position: 'relative', color: '#FBF7F0', background: '#0D1828', overflow: 'clip' }}>
+        <div className="sec-bg bgc plx-bg" aria-hidden="true" style={{ backgroundImage: 'url(/project-gallery/3.jpeg)' }} />
+        <div className="shade" aria-hidden="true" style={{ background: 'rgba(13,24,40,.4)' }} />
+        <div className="wrap about-in" style={{ position: 'relative', paddingTop: 140, paddingBottom: 120 }}>
+          <p className="kicker rv">About Ambrosian</p>
+          <h2 className="h-lg" style={{ marginTop: 20, fontSize: 'clamp(30px, 3.6vw, 52px)', color: '#FBF7F0' }}>
+            <span className="ln rv-ln"><span>Creating unforgettable</span></span>
+            <span className="ln rv-ln"><span>moments with</span></span>
+            <span className="ln rv-ln"><span>professional excellence</span></span>
+          </h2>
+          <div className="rv" style={{ maxWidth: 620, marginTop: 36 }}>
+            <div style={{ padding: '34px 38px', background: 'rgba(13,24,40,.82)' }}>
+              <p style={{ fontSize: 18, lineHeight: 1.7, fontWeight: 300, color: '#FBF7F0' }}>
+                Ambrosian is a London event partner for weddings, cultural festivals, concerts and corporate occasions. Catering, styling, staffing, security, marketing and film sit under one roof — so the team that plans your event is the team that delivers it, down to the final detail.
+              </p>
+            </div>
+            <Link className="btn btn-gold" href="#services">
+              Find out more <Arrow />
+            </Link>
+          </div>
+        </div>
+        <div style={{ position: 'relative', background: 'rgba(13,24,40,.9)', borderTop: '1px solid rgba(249,200,121,.3)' }}>
+          <div className="wrap pillars">
+            <div className="pillar rv"><span className="pillar-n">01</span><h3 className="h-md pillar-t">Professional excellence</h3><p className="pillar-d">Highly trained, experienced staff at every post.</p></div>
+            <div className="pillar rv"><span className="pillar-n">02</span><h3 className="h-md pillar-t">Premium quality</h3><p className="pillar-d">Five-star service and attention to every detail.</p></div>
+            <div className="pillar rv"><span className="pillar-n">03</span><h3 className="h-md pillar-t">Comprehensive solutions</h3><p className="pillar-d">All-in-one services, from planning to execution.</p></div>
+          </div>
+        </div>
+      </section>
 
-        {/* Card 1 — Banglafest & Award UK 2026 */}
-        <div className="bg-gradient-to-r from-ambrosian-gold/10 via-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 sm:p-8 md:p-12">
-            {/* Left: Image */}
-            <div className="relative h-[300px] sm:h-[400px] md:h-[460px] rounded-lg overflow-hidden border border-ambrosian-gold/20 bg-white flex items-center justify-center">
+      {/* Featured Projects */}
+      <section className="sec-pad" style={{ background: '#0D1828' }}>
+        <div className="wrap">
+
+          {/* Card 1 — Banglafest & Award UK 2026 */}
+          <div className="feat rv">
+            <div className="feat-media light">
               <Image
                 src="/projects/banglafest-2026.png"
                 alt="Banglafest & Award UK 2026"
                 fill
-                className="object-contain p-4"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain p-6"
+                sizes="(max-width: 1080px) 100vw, 50vw"
               />
             </div>
-
-            {/* Right: Text Content */}
-            <div className="flex flex-col justify-center gap-6 sm:gap-8">
-              <div>
-                <span className="inline-block bg-ambrosian-gold text-ambrosian-dark text-xs font-bold tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-6">
-                  UPCOMING EVENT
-                </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ambrosian-gold mb-2 leading-tight">
-                  Banglafest & Award UK 2026
-                </h2>
-                <p className="text-ambrosian-gold/50 text-sm mb-4 font-medium">
-                  Sunday, 19 July 2026 · The Royal Regency, London
-                </p>
-                <p className="text-ambrosian-gold/70 text-sm sm:text-base leading-relaxed">
-                  A vibrant cultural and entertainment event celebrating community, talent, and achievement. Featuring an exciting evening of live performances, cultural showcases, and a prestigious awards ceremony in a lively and elegant atmosphere.
-                </p>
+            <div className="feat-body">
+              <span className="badge">UPCOMING EVENT</span>
+              <h2 className="h-md feat-t">Banglafest & Award UK 2026</h2>
+              <p className="feat-meta">Sunday, 19 July 2026 · The Royal Regency, London</p>
+              <p className="feat-d">
+                A vibrant cultural and entertainment event celebrating community, talent, and achievement. Featuring an exciting evening of live performances, cultural showcases, and a prestigious awards ceremony in a lively and elegant atmosphere.
+              </p>
+              <ul className="ticks">
+                <li>Premium Ground Floor, VIP & General Seating</li>
+                <li>Live Performances & Cultural Entertainment</li>
+                <li>Prestigious Awards Ceremony</li>
+              </ul>
+              <div style={{ marginTop: 8 }}>
+                <Link href="/projects" className="btn btn-gold">
+                  View All Projects <Arrow />
+                </Link>
               </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Premium Ground Floor, VIP & General Seating</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Live Performances & Cultural Entertainment</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Prestigious Awards Ceremony</span>
-                </div>
-              </div>
-
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 bg-ambrosian-gold text-ambrosian-dark px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:opacity-90 transition-opacity w-fit"
-              >
-                View All Projects →
-              </Link>
             </div>
           </div>
-        </div>
 
-        {/* Card 2 — Ramadan & Eid Fair 2026 */}
-        <div className="bg-gradient-to-l from-ambrosian-gold/10 via-ambrosian-gold/5 to-transparent border border-ambrosian-gold/30 rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 sm:p-8 md:p-12">
-            {/* Left: Text Content (reversed on desktop) */}
-            <div className="flex flex-col justify-center gap-6 sm:gap-8 md:order-1">
-              <div>
-                <span className="inline-block bg-ambrosian-gold/20 text-ambrosian-gold border border-ambrosian-gold/40 text-xs font-bold tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-6">
-                  RECENT PROJECT
-                </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ambrosian-gold mb-2 leading-tight">
-                  Ramadan & Eid Fair 2026
-                </h2>
-                <p className="text-ambrosian-gold/50 text-sm mb-4 font-medium">
-                  Sunday, 8 March 2026 · Mayfair Venue, London
-                </p>
-                <p className="text-ambrosian-gold/70 text-sm sm:text-base leading-relaxed">
-                  A grand celebration of community and culture. We were the official event management and sponsor of this immersive gathering featuring traditional arts, world-class exhibitions, shopping experiences, and authentic food stalls.
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Premium Shopping Experience</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Iftar Distribution & Food Stalls</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-ambrosian-gold mt-1">✓</span>
-                  <span className="text-ambrosian-gold/80 text-sm">Live Entertainment & Cultural Shows</span>
-                </div>
-              </div>
-
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 border border-ambrosian-gold/50 text-ambrosian-gold px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:bg-ambrosian-gold/10 transition-colors w-fit"
-              >
-                View All Projects →
-              </Link>
-            </div>
-
-            {/* Right: Image */}
-            <div className="relative h-[300px] sm:h-[400px] md:h-[460px] rounded-lg overflow-hidden border border-ambrosian-gold/20 md:order-2">
+          {/* Card 2 — Ramadan & Eid Fair 2026 */}
+          <div className="feat feat-rev rv">
+            <div className="feat-media ph">
               <Image
                 src="https://res.cloudinary.com/drgot7znf/image/upload/v1777142781/ade0d540-1103-4a43-96ac-dbe7ac2b126c_wkha9c.jpg"
                 alt="Ramadan & Eid Fair 2026"
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 1080px) 100vw, 50vw"
               />
+            </div>
+            <div className="feat-body">
+              <span className="badge badge-line">RECENT PROJECT</span>
+              <h2 className="h-md feat-t">Ramadan & Eid Fair 2026</h2>
+              <p className="feat-meta">Sunday, 8 March 2026 · Mayfair Venue, London</p>
+              <p className="feat-d">
+                A grand celebration of community and culture. We were the official event management and sponsor of this immersive gathering featuring traditional arts, world-class exhibitions, shopping experiences, and authentic food stalls.
+              </p>
+              <ul className="ticks">
+                <li>Premium Shopping Experience</li>
+                <li>Iftar Distribution & Food Stalls</li>
+                <li>Live Entertainment & Cultural Shows</li>
+              </ul>
+              <div style={{ marginTop: 8 }}>
+                <Link href="/projects" className="btn btn-line">
+                  View All Projects <Arrow />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="container mx-auto px-4 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-ambrosian-gold mb-4">
-            Our Services
-          </h2>
-          <p className="text-lg text-ambrosian-gold/70 max-w-2xl mx-auto">
-            Comprehensive event solutions tailored to your needs
-          </p>
+      {/* Marquee (decorative) */}
+      <div className="mq" aria-hidden="true">
+        <div className="mq-track mq-l">
+          {[0, 1].map((k) =>
+            services.map((s, i) => (
+              <span key={`${k}-${s.slug}`} style={{ display: 'contents' }}>
+                <span className={`mq-word${i % 2 ? ' o' : ''}`}>{s.title}</span>
+                <Ring />
+              </span>
+            ))
+          )}
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <Link
-              key={service.slug}
-              href={`/services/${service.slug}`}
-              className="bg-ambrosian-dark border border-ambrosian-gold/30 rounded-lg p-6 hover:border-ambrosian-gold transition-all hover:shadow-lg hover:shadow-ambrosian-gold/20 group"
-            >
-              <div className="mb-4 w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+      {/* Services Section */}
+      <section id="services" className="sec-pad on-light" style={{ position: 'relative', padding: '120px 0 130px', overflow: 'clip' }}>
+        <div className="drift" aria-hidden="true" style={{ position: 'absolute', right: -240, top: 60, width: 760, height: 760 }}>
+          <svg viewBox="0 0 400 400" fill="none" style={{ display: 'block', width: '100%', height: '100%' }}><circle cx="200" cy="200" r="186" stroke="#F3E9D8" strokeWidth="24" strokeDasharray="1020 150" /></svg>
+        </div>
+        <div className="drift" aria-hidden="true" style={{ position: 'absolute', left: -280, bottom: -160, width: 640, height: 640 }}>
+          <svg viewBox="0 0 400 400" fill="none" style={{ display: 'block', width: '100%', height: '100%' }}><circle cx="200" cy="200" r="186" stroke="#F3E9D8" strokeWidth="24" strokeDasharray="1020 150" /></svg>
+        </div>
+        <div className="wrap" style={{ position: 'relative' }}>
+          <div style={{ textAlign: 'center' }}>
+            <h2 className="h-lg" style={{ color: '#0D1828' }}>
+              <span className="ln rv-ln"><span>Our Services</span></span>
+            </h2>
+            <span className="bar grow" aria-hidden="true" />
+            <p className="rv" style={{ maxWidth: '40em', margin: '26px auto 0', fontSize: 17, lineHeight: 1.7, color: '#4F5B6D' }}>
+              Comprehensive event solutions tailored to your needs
+            </p>
+          </div>
+
+          <div className="svc-grid">
+            {services.map((service) => (
+              <div key={service.slug} className="svc rv">
                 <Image
                   src={service.icon}
                   alt={service.title}
-                  width={84}
-                  height={84}
-                  className="w-full h-full object-contain"
+                  width={112}
+                  height={112}
+                  className="ico ico-dark"
                 />
+                <div>
+                  <Link className="svc-label" href={`/services/${service.slug}`}>
+                    {service.title} <Arrow />
+                  </Link>
+                  <p className="svc-d">{service.description}</p>
+                  <Link href={`/services/${service.slug}`} className="more" style={{ marginTop: 18 }}>
+                    Learn More <Arrow />
+                  </Link>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-ambrosian-gold mb-3 group-hover:opacity-80 transition-opacity">
-                {service.title}
-              </h3>
-              <p className="text-ambrosian-gold/70">
-                {service.description}
-              </p>
-              <div className="mt-4 text-ambrosian-gold group-hover:translate-x-2 transition-transform inline-block">
-                Learn More →
-              </div>
-            </Link>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Gallery Section */}
       <Gallery />
 
-      {/* Why Choose Us Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="bg-ambrosian-gold/5 border border-ambrosian-gold/20 rounded-lg p-8 md:p-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-ambrosian-gold mb-8 text-center">
-            Why Choose Ambrosian?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-4">⭐</div>
-              <h3 className="text-xl font-semibold text-ambrosian-gold mb-2">
-                Professional Excellence
-              </h3>
-              <p className="text-ambrosian-gold/70">
-                Highly trained and experienced professionals dedicated to perfection
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">💎</div>
-              <h3 className="text-xl font-semibold text-ambrosian-gold mb-2">
-                Premium Quality
-              </h3>
-              <p className="text-ambrosian-gold/70">
-                5-star service and attention to detail in everything we do
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-xl font-semibold text-ambrosian-gold mb-2">
-                Comprehensive Solutions
-              </h3>
-              <p className="text-ambrosian-gold/70">
-                All-in-one event services from planning to execution
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-ambrosian-gold mb-6">
-            Ready to Create Your Perfect Event?
+      <section id="contact" style={{ position: 'relative', color: '#FBF7F0', background: '#0D1828', overflow: 'clip' }}>
+        <div className="sec-bg bgc plx-bg" aria-hidden="true" style={{ backgroundImage: 'url(/project-gallery/7.jpeg)' }} />
+        <div className="shade" aria-hidden="true" style={{ background: 'rgba(13,24,40,.72)' }} />
+        <div className="wrap" style={{ position: 'relative', textAlign: 'center', paddingTop: 140, paddingBottom: 140 }}>
+          <h2 className="h-lg" style={{ fontSize: 'clamp(32px, 3.8vw, 54px)', color: '#FBF7F0' }}>
+            <span className="ln rv-ln"><span>Ready to Create</span></span>
+            <span className="ln rv-ln"><span>Your <em className="serif-i" style={{ fontSize: '1.14em' }}>Perfect</em> Event?</span></span>
           </h2>
-          <p className="text-lg text-ambrosian-gold/70 mb-8">
+          <p className="rv" style={{ margin: '28px auto 0', maxWidth: '36em', fontSize: 18, lineHeight: 1.7, fontWeight: 300, color: '#FBF7F0' }}>
             Contact us today to discuss your requirements and let us bring your vision to life
           </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-ambrosian-gold text-ambrosian-dark px-10 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
-          >
-            Contact Us Now
-          </Link>
+          <div className="rv" style={{ marginTop: 40 }}>
+            <Link href="/contact" className="btn btn-gold">
+              Contact Us Now <Arrow />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
